@@ -1,5 +1,6 @@
 package br.com.alura.screenmatch.principal;
 
+import br.com.alura.screenmatch.model.DadosEpisodio;
 import br.com.alura.screenmatch.model.DadosSerie;
 import br.com.alura.screenmatch.model.DadosTemporada;
 import br.com.alura.screenmatch.service.ConsumoAPI;
@@ -42,5 +43,9 @@ public class Principal {
 		}
 
         temporadas.forEach(System.out::println);
+
+        temporadas.stream().map(DadosTemporada::episodios)
+                .flatMap(List::stream)
+                .forEach(ep -> System.out.println(ep.titulo()));
     }
 }
