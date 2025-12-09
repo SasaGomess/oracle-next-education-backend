@@ -4,11 +4,10 @@ import jakarta.persistence.Embeddable;
 import lombok.*;
 import med.voll.api.endereco.DadosEndereco;
 
+@Embeddable
 @Getter
-@Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Embeddable
 public class Endereco {
     private String logradouro;
     private String bairro;
@@ -20,9 +19,9 @@ public class Endereco {
 
 
     public Endereco(DadosEndereco endereco) {
+        this.logradouro = endereco.logradouro();
         this.bairro = endereco.bairro();
         this.cep = endereco.cep();
-        this.logradouro = endereco.lougradouro();
         this.cidade = endereco.cidade();
         this.numero = endereco.numero();
         this.uf = endereco.uf();
