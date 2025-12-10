@@ -19,6 +19,9 @@ public record DadosCadastroMedico(
         @NotBlank
         String crm,
 
+        @NotBlank
+        String telefone,
+
         @NotNull
         Especialidade especialidade,
 
