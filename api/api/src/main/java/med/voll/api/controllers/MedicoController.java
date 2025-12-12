@@ -11,8 +11,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import java.util.Comparator;
-import java.util.List;
 
 @RestController
 @RequestMapping("medicos")
@@ -56,4 +54,11 @@ public class MedicoController {
         medico.excluir();
         return ResponseEntity.noContent().build();
     }
+
+    @GetMapping(value = "{id}")
+    public ResponseEntity<DetalhamentoMedico> detalhar(@PathVariable Long id){
+        var medico = repository.getReferenceById(id);
+        return ResponseEntity.ok(new DetalhamentoMedico(medico));
+    }
+
 }
