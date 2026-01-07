@@ -71,26 +71,26 @@ public class Principal {
 //                .map(e -> e.titulo().toUpperCase())
 //                .peek(e -> System.out.println("Titulo em caixa alta: " + e))
 //                .forEach(System.out::println);
-
+//
         List<Episodio> episodios = temporadas.stream()
                 .flatMap(t -> t.episodios().stream()
                         .map(d -> new Episodio(t.numero(), d)))
                 .collect(Collectors.toList());
 
-        System.out.println("Digite um trecho do tituo do episódio");
+        System.out.println("Digite um trecho do titulo do episódio");
         var trechoDoTitulo = leitura.nextLine();
 
         Optional<Episodio> episodioBuscado = episodios.stream()
                 .filter(e -> e.getTitulo().toLowerCase().contains(trechoDoTitulo.toLowerCase()))
                 .findFirst();
-
-        if (episodioBuscado.isPresent()){
-            System.out.println("Episódio encontrado, temporada: " + episodioBuscado.get().getTemporada());
-        }else {
-            System.out.println("Episódio não encontrado");
-        }
-
-
+//
+//        if (episodioBuscado.isPresent()){
+//            System.out.println("Episódio encontrado, temporada: " + episodioBuscado.get().getTemporada());
+//        }else {
+//            System.out.println("Episódio não encontrado");
+//        }
+//
+//
 //        System.out.println("A partir de que ano você deseja ver os episódios?");
 //
 //        var ano = leitura.nextInt();
@@ -101,7 +101,14 @@ public class Principal {
 //        episodios.stream().filter(e -> e.getDataLancamento() != null && e.getDataLancamento().isAfter(dataBusca))
 //                .forEach(e -> System.out.println("Temporada: " + e.getTemporada() + ", Episodio: " + e.getNumeroEpisodio() + ", Data de Lançamento: " + e.getDataLancamento().format(fmt)));
 
+        Map<Integer, Double> avaliacoesPorTemporada = episodios
+                .stream()
+                .filter(e -> e.getAvaliacao() > 0.0)
+                .collect(Collectors.groupingBy(Episodio::getTemporada, Collectors.averagingDouble(Episodio::getAvaliacao)));
 
+        for (Map.Entry<Integer, Double> entry : avaliacoesPorTemporada.entrySet()){
+            System.out.printf("TEMPORADA: %d = MÉDIA DE AVALIAÇÃO: %.1f %n", entry.getKey(), entry.getValue());
+        }
 
     }
 }
