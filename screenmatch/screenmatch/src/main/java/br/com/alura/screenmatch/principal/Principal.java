@@ -60,18 +60,18 @@ public class Principal {
                 .flatMap(t -> t.episodios().stream())
                 .collect(Collectors.toList());
 
-//        System.out.println("\n Top 10 episodios buscados:");
-//        dadosEpisodios.stream()
-//                .filter(e -> !e.avaliacao().equalsIgnoreCase("N/A"))
-//                .peek(e -> System.out.println("Primeiro filtro(N/A): " + e))
-//                .sorted(Comparator.comparing(DadosEpisodio::avaliacao).reversed())
-//                .peek(e -> System.out.println("Ordenação: " + e))
-//                .limit(10)
-//                .peek(e -> System.out.println("Limite 10 " + e))
-//                .map(e -> e.titulo().toUpperCase())
-//                .peek(e -> System.out.println("Titulo em caixa alta: " + e))
-//                .forEach(System.out::println);
-//
+        System.out.println("\n Top 10 episodios buscados:");
+        dadosEpisodios.stream()
+                .filter(e -> !e.avaliacao().equalsIgnoreCase("N/A"))
+                .peek(e -> System.out.println("Primeiro filtro(N/A): " + e))
+                .sorted(Comparator.comparing(DadosEpisodio::avaliacao).reversed())
+                .peek(e -> System.out.println("Ordenação: " + e))
+                .limit(10)
+                .peek(e -> System.out.println("Limite 10 " + e))
+                .map(e -> e.titulo().toUpperCase())
+                .peek(e -> System.out.println("Titulo em caixa alta: " + e))
+                .forEach(System.out::println);
+
         List<Episodio> episodios = temporadas.stream()
                 .flatMap(t -> t.episodios().stream()
                         .map(d -> new Episodio(t.numero(), d)))
@@ -83,23 +83,23 @@ public class Principal {
         Optional<Episodio> episodioBuscado = episodios.stream()
                 .filter(e -> e.getTitulo().toLowerCase().contains(trechoDoTitulo.toLowerCase()))
                 .findFirst();
-//
-//        if (episodioBuscado.isPresent()){
-//            System.out.println("Episódio encontrado, temporada: " + episodioBuscado.get().getTemporada());
-//        }else {
-//            System.out.println("Episódio não encontrado");
-//        }
-//
-//
-//        System.out.println("A partir de que ano você deseja ver os episódios?");
-//
-//        var ano = leitura.nextInt();
-//        leitura.nextLine();
-//
-//        LocalDate dataBusca = LocalDate.of(ano, 1, 1);
-//
-//        episodios.stream().filter(e -> e.getDataLancamento() != null && e.getDataLancamento().isAfter(dataBusca))
-//                .forEach(e -> System.out.println("Temporada: " + e.getTemporada() + ", Episodio: " + e.getNumeroEpisodio() + ", Data de Lançamento: " + e.getDataLancamento().format(fmt)));
+
+        if (episodioBuscado.isPresent()){
+            System.out.println("Episódio encontrado, temporada: " + episodioBuscado.get().getTemporada());
+        }else {
+            System.out.println("Episódio não encontrado");
+        }
+
+
+        System.out.println("A partir de que ano você deseja ver os episódios?");
+
+        var ano = leitura.nextInt();
+        leitura.nextLine();
+
+        LocalDate dataBusca = LocalDate.of(ano, 1, 1);
+
+        episodios.stream().filter(e -> e.getDataLancamento() != null && e.getDataLancamento().isAfter(dataBusca))
+                .forEach(e -> System.out.println("Temporada: " + e.getTemporada() + ", Episodio: " + e.getNumeroEpisodio() + ", Data de Lançamento: " + e.getDataLancamento().format(fmt)));
 
         Map<Integer, Double> avaliacoesPorTemporada = episodios
                 .stream()
@@ -109,6 +109,13 @@ public class Principal {
         for (Map.Entry<Integer, Double> entry : avaliacoesPorTemporada.entrySet()){
             System.out.printf("TEMPORADA: %d = MÉDIA DE AVALIAÇÃO: %.1f %n", entry.getKey(), entry.getValue());
         }
+
+        DoubleSummaryStatistics est = episodios
+                .stream()
+                .filter(e -> e.getAvaliacao() > 0.0)
+                .collect(Collectors.summarizingDouble(Episodio::getAvaliacao));
+
+        System.out.println("Média: " + est.getAverage() + ", Pior Episódio: " + est.getMin() + ", *Melhor Episódio*: " + est.getMax() + ", Quantidade: " + est.getCount());
 
     }
 }
