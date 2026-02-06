@@ -25,12 +25,20 @@ public class Episodio {
         this.temporada = numeroTemporada;
         this.titulo = dadosEpisodio.titulo();
         this.numeroEpisodio = dadosEpisodio.numero();
-        this.avaliacao = Optional.of(Double.valueOf(dadosEpisodio.avaliacao())).orElse(0.0);
+        try {
+            this.avaliacao = Double.valueOf(dadosEpisodio.avaliacao());
+        }catch (NumberFormatException e){
+            this.avaliacao = 0.0;
+        }
+
         try {
             this.dataLancamento = LocalDate.parse(dadosEpisodio.dataLancamento());
         } catch (DateTimeParseException ex) {
             this.dataLancamento = null;
         }
+    }
+
+    public Episodio() {
     }
 
     public Long getId() {

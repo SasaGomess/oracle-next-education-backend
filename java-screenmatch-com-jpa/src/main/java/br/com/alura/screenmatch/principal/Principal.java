@@ -22,15 +22,18 @@ public class Principal {
     private ConverteDados conversor = new ConverteDados();
     private final String ENDERECO = "https://www.omdbapi.com/?t=";
     private final String API_KEY = "&apikey=" + System.getenv("OMDB_API_KEY");
-    private List<DadosSerie> listaSeries = new ArrayList<>();
-
+    private List<DadosSerie> listaDadosSeries = new ArrayList<>();
 
     private SerieRepository repositorio;
+    private List<Serie> series = new ArrayList<>();
 
     public Principal(SerieRepository repositorio) {
         this.repositorio = repositorio;
     }
 
+    public Principal() {
+
+    }
 
     public void exibeMenu() {
         var opcao = 0;
@@ -39,7 +42,7 @@ public class Principal {
                     1 - Buscar séries
                     2 - Buscar episódios
                     3 - Listar séries buscadas
-       
+                    4 - Buscar série por título 
                     0 - Sair                                 
                     """;
 
@@ -52,10 +55,17 @@ public class Principal {
                     buscarSerieWeb();
                     break;
                 case 2:
-                    buscarEpisodioPorSerie();
+                    try {
+                        buscarEpisodioPorSerie();
+                    }catch (IllegalArgumentException e ){
+                        System.out.println("Erro: "+ e.getMessage());
+                    }
                     break;
                 case 3:
                     listarSeriesBuscadas();
+                    break;
+                case 4:
+                    listarSeriePorTitulo();
                     break;
                 case 0:
                     System.out.println("Saindo...");
@@ -65,6 +75,8 @@ public class Principal {
             }
         }while (opcao != 0);
     }
+
+
 
     private void buscarSerieWeb() {
         DadosSerie dados = getDadosSerie();
@@ -85,21 +97,45 @@ public class Principal {
     }
 
     private void buscarEpisodioPorSerie(){
-        DadosSerie dadosSerie = getDadosSerie();
+        listarSeriesBuscadas();
+        System.out.println("Digite o nome da série para buscar os episódios: ");
+        var nomeSerie = leitura.nextLine();
+
+        var serieBuscada = repositorio.findByTituloContainingIgnoreCase(nomeSerie)
+                .orElseThrow(() -> new IllegalArgumentException("Série não encontrada"));
+
         List<DadosTemporada> temporadas = new ArrayList<>();
 
-        for (int i = 1; i <= dadosSerie.totalTemporadas(); i++) {
-            var json = consumo.obterDados(ENDERECO + dadosSerie.titulo().replace(" ", "+") + "&season=" + i + API_KEY);
+        for (int i = 1; i <= serieBuscada.getTotalTemporadas(); i++) {
+            var json = consumo.obterDados(ENDERECO + serieBuscada.getTitulo().replace(" ", "+") + "&season=" + i + API_KEY);
             DadosTemporada dadosTemporada = conversor.obterDados(json, DadosTemporada.class);
             temporadas.add(dadosTemporada);
         }
         temporadas.forEach(System.out::println);
+
+        List<Episodio> episodios = temporadas.stream()
+                .flatMap(dt -> dt.episodios().stream()
+                        .map(de -> new Episodio(dt.numero(), de)))
+                .collect(Collectors.toList());
+
+        serieBuscada.setEpisodios(episodios);
+
+        repositorio.save(serieBuscada);
     }
 
     private void listarSeriesBuscadas() {
-        List<Serie> series = repositorio.findAll();
+        series = repositorio.findAll();
         series.stream()
                 .sorted(Comparator.comparing(Serie::getGenero))
                 .forEach(System.out::println);
+    }
+    private void listarSeriePorTitulo() {
+        System.out.println("Digite o nome da série para buscar os episódios: ");
+        var nomeSerie = leitura.nextLine();
+
+        Serie serieBuscada = repositorio.findByTituloContainingIgnoreCase(nomeSerie)
+                .orElseThrow(() -> new IllegalArgumentException("Série não encontrada"));
+
+        System.out.println("Dados da série: " + serieBuscada);
     }
 }
