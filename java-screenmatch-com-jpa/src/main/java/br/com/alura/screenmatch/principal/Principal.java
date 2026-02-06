@@ -42,7 +42,8 @@ public class Principal {
                     1 - Buscar séries
                     2 - Buscar episódios
                     3 - Listar séries buscadas
-                    4 - Buscar série por título 
+                    4 - Buscar série por título
+                    5 - Buscar séries por Ator
                     0 - Sair                                 
                     """;
 
@@ -65,7 +66,10 @@ public class Principal {
                     listarSeriesBuscadas();
                     break;
                 case 4:
-                    listarSeriePorTitulo();
+                    buscarSeriePorTitulo();
+                    break;
+                case 5:
+                    buscarSeriesPorAtor();
                     break;
                 case 0:
                     System.out.println("Saindo...");
@@ -75,6 +79,7 @@ public class Principal {
             }
         }while (opcao != 0);
     }
+
 
 
 
@@ -129,7 +134,7 @@ public class Principal {
                 .sorted(Comparator.comparing(Serie::getGenero))
                 .forEach(System.out::println);
     }
-    private void listarSeriePorTitulo() {
+    private void buscarSeriePorTitulo() {
         System.out.println("Digite o nome da série para buscar os episódios: ");
         var nomeSerie = leitura.nextLine();
 
@@ -137,5 +142,18 @@ public class Principal {
                 .orElseThrow(() -> new IllegalArgumentException("Série não encontrada"));
 
         System.out.println("Dados da série: " + serieBuscada);
+    }
+    private void buscarSeriesPorAtor() {
+        System.out.println("Digite o nome do ator para buscar a série: ");
+        var nomeAtor = leitura.nextLine();
+
+        System.out.println("Avaliações a partir de que valor?");
+        var avaliacao = leitura.nextDouble();
+
+        List<Serie> seriesEncontradas = repositorio.findByAtoresContainingIgnoreCaseAndAvaliacaoGreaterThanEqual(nomeAtor, avaliacao);
+
+        System.out.println("Série em que " + nomeAtor + " trabalhou");
+        seriesEncontradas.forEach(s -> System.out.println(s.getTitulo() + " " + s.getAvaliacao()));
+
     }
 }
