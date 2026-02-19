@@ -78,7 +78,7 @@ public class Principal {
                     buscarSeriesPorCategoria();
                     break;
                 case 8:
-                    buscarSeriesPelaQuantidadeTemporadas();
+                    buscarSeriesPorTemporadaEAvaliacao();
                     break;
                 case 0:
                     System.out.println("Saindo...");
@@ -176,13 +176,13 @@ public class Principal {
         seriePorCategoria.forEach(System.out::println);
     }
 
-    private void buscarSeriesPelaQuantidadeTemporadas() {
+    private void buscarSeriesPorTemporadaEAvaliacao() {
         System.out.println("Digite quantas temporadas você em tempo de maratonar");
         var quantidadeTemporadas = leitura.nextInt();
         System.out.println("Avaliações a partir de qual valor? ");
         var avaliacao = leitura.nextDouble();
 
-        List<Serie> seriesEncontradas = repositorio.findByTopOrderByTotalTemporadasAndOrderByAvaliacaoDesc(quantidadeTemporadas, avaliacao);
+        List<Serie> seriesEncontradas = repositorio.findByTotalTemporadasLessThanEqualAndAvaliacaoGreaterThanEqual(quantidadeTemporadas, avaliacao);
 
         seriesEncontradas.forEach(s -> System.out.println(s.getTitulo() + " " + s.getTotalTemporadas() + " " + s.getAvaliacao()));
 
