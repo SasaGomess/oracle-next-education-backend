@@ -1,5 +1,6 @@
-package med.voll.api.controller;
+package med.voll.api.controllers;
 
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import med.voll.api.domain.medico.*;
@@ -13,7 +14,8 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 
 @RestController
-@RequestMapping("medicos")
+@RequestMapping("/medicos")
+@SecurityRequirement(name = "bearer-key")
 public class MedicoController {
 
     @Autowired
@@ -23,12 +25,13 @@ public class MedicoController {
     @Transactional
     public ResponseEntity<DetalhamentoMedico> cadastrar(@RequestBody @Valid DadosCadastroMedico dados, UriComponentsBuilder uriBuilder){
         var entidade = new Medico(dados);
-        repository.save(entidade);
+        var medicoSalvo = repository.save(entidade);
+
         var uri = uriBuilder
                 .path("/medicos/{id}")
-                .buildAndExpand(entidade.getId())
+                .buildAndExpand(medicoSalvo.getId())
                 .toUri();
-        return ResponseEntity.created(uri).body(new DetalhamentoMedico(entidade));
+        return ResponseEntity.created(uri).body(new DetalhamentoMedico(medicoSalvo));
     }
 
     @GetMapping
