@@ -5,9 +5,28 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="adc5aff1-7665-4f5a-83b2-cfe0d084fd7a" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/../java-screenmatch-com-jpa/src/main/java/br/com/alura/screenmatch/config/CorsConfiguration.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../java-screenmatch-com-jpa/src/main/java/br/com/alura/screenmatch/controller/SerieController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../java-screenmatch-com-jpa/src/main/java/br/com/alura/screenmatch/service/SerieService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api/src/main/java/med/voll/api/controllers/MedicoController.java" beforeDir="false" afterPath="$PROJECT_DIR$/api/src/main/java/med/voll/api/controllers/MedicoController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/api/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/src/main/java/med/voll/api/domain/endereco/DadosEndereco.java" beforeDir="false" afterPath="$PROJECT_DIR$/api/src/main/java/med/voll/api/domain/endereco/DadosEndereco.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/src/main/java/med/voll/api/domain/medico/DadosAtualizacaoMedico.java" beforeDir="false" afterPath="$PROJECT_DIR$/api/src/main/java/med/voll/api/domain/medico/DadosAtualizacaoMedico.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/src/main/java/med/voll/api/domain/medico/DadosCadastroMedico.java" beforeDir="false" afterPath="$PROJECT_DIR$/api/src/main/java/med/voll/api/domain/medico/DadosCadastroMedico.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/src/main/java/med/voll/api/domain/medico/DadosListagemMedicos.java" beforeDir="false" afterPath="$PROJECT_DIR$/api/src/main/java/med/voll/api/domain/medico/DadosListagemMedicos.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/src/main/java/med/voll/api/domain/medico/DetalhamentoMedico.java" beforeDir="false" afterPath="$PROJECT_DIR$/api/src/main/java/med/voll/api/domain/medico/DetalhamentoMedico.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/src/main/java/med/voll/api/domain/medico/Endereco.java" beforeDir="false" afterPath="$PROJECT_DIR$/api/src/main/java/med/voll/api/domain/medico/Endereco.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/src/main/java/med/voll/api/domain/medico/Especialidade.java" beforeDir="false" afterPath="$PROJECT_DIR$/api/src/main/java/med/voll/api/domain/medico/Especialidade.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/src/main/java/med/voll/api/domain/medico/Medico.java" beforeDir="false" afterPath="$PROJECT_DIR$/api/src/main/java/med/voll/api/domain/medico/Medico.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/src/main/java/med/voll/api/domain/medico/MedicoRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/api/src/main/java/med/voll/api/domain/medico/MedicoRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/src/main/java/med/voll/api/infra/TratadorDeErros.java" beforeDir="false" afterPath="$PROJECT_DIR$/api/src/main/java/med/voll/api/infra/TratadorDeErros.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../exercicios/Atividades/src/main/java/two_sum/Solution.java" beforeDir="false" afterPath="$PROJECT_DIR$/../exercicios/Atividades/src/main/java/two_sum/Solution.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../java-screenmatch-com-jpa/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../java-screenmatch-com-jpa/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../java-screenmatch-com-jpa/src/main/java/br/com/alura/screenmatch/ScreenmatchApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/../java-screenmatch-com-jpa/src/main/java/br/com/alura/screenmatch/ScreenmatchApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../java-screenmatch-com-jpa/src/main/java/br/com/alura/screenmatch/model/Episodio.java" beforeDir="false" afterPath="$PROJECT_DIR$/../java-screenmatch-com-jpa/src/main/java/br/com/alura/screenmatch/model/Episodio.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../java-screenmatch-com-jpa/src/main/java/br/com/alura/screenmatch/model/Serie.java" beforeDir="false" afterPath="$PROJECT_DIR$/../java-screenmatch-com-jpa/src/main/java/br/com/alura/screenmatch/model/Serie.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../java-screenmatch-com-jpa/src/main/java/br/com/alura/screenmatch/principal/Principal.java" beforeDir="false" afterPath="$PROJECT_DIR$/../java-screenmatch-com-jpa/src/main/java/br/com/alura/screenmatch/principal/Principal.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../java-screenmatch-com-jpa/src/main/java/br/com/alura/screenmatch/repository/SerieRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/../java-screenmatch-com-jpa/src/main/java/br/com/alura/screenmatch/repository/SerieRepository.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -21,9 +40,9 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Enum" />
-        <option value="Class" />
         <option value="Interface" />
         <option value="Record" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -39,18 +58,18 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Application.ApiApplication.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/ProjetoBackend/api-eyegen&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.ApiApplication.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "main",
+    "ignore.virus.scanning.warn.message": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/temp/ws-intelliJ/OracleNextOneBackend/java-screenmatch-com-jpa",
+    "settings.editor.selected.configurable": "preferences.lookFeel"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
       <recent name="med.voll.api.medico" />
